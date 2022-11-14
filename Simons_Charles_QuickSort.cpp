@@ -88,17 +88,22 @@ void runQuickSort(string inputFile, string outputFile) {
     cout << "Reading from file..." << endl;
     readInputFile(inputFile, values);
 
-    cout << "Running QuickSort on values..." << endl;
-    quickSort(values, 0, values.size());
+    cout << "Printing values..." << endl;
+    for (float f : values) {
+        cout << f << " " << endl;
+    }
 
-    cout << "Values sorted..." << endl;
-    cout << "Writing to file..." << endl;
-    writeOutputFile(outputFile, values);
+    // cout << "Running QuickSort on values..." << endl;
+    // quickSort(values, 0, values.size());
+
+    // cout << "Values sorted..." << endl;
+    // cout << "Writing to file..." << endl;
+    // writeOutputFile(outputFile, values);
     exit(0);
 }
 
 int main(int argc, char ** argv) {
-    if (argc != 2) {
+    if (argc != 3) {
         cout << "Usage: simons_charles_quickSort <input_file> <output_file>" << endl;
     } else {
         runQuickSort(argv[0], argv[1]);

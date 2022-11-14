@@ -12,10 +12,11 @@ using std::ofstream;
 using std::fixed;
 using std::setprecision;
 
-// generates the random floats between 0.00000 and 999.99999 cast as an integer
+// generates the random floats between -500.00000 and 500.00000 cast as an integer
 float genRandFloat() {
-    float max = 501.00000;
-    float num = (float(rand()) / float((RAND_MAX)) * max);
+    float min = -500.00000;
+    float max = 500.00000;
+    float num = min + static_cast<float> (rand()) / (static_cast<float>(RAND_MAX/(max-min)));
     return num;
 }
 
