@@ -64,7 +64,7 @@ void writeOutputFile(string outputFile, vector<float> values) {
 // picks a random pivot value
 int partition(vector<float> values, int start, int end) {
 	int pivot = random() % sizeof(values);
-	swap(values[pivot], values[0]); // swaps the two values at 0 and pivot
+	swap(values[pivot], values[start]); // swaps the two values at 0 and pivot
     return pivot;
 }
 
@@ -74,11 +74,21 @@ void quickSort(vector<float> values, int start, int end) {
 		return;
 	int part = partition(values, start, end);
 	
+    // // new vector for first part of initial vector
+    // for (int i = start; i < part; i++) {
+
+    // }
+
+    // // new vector for last part of initial vector
+    // for (int i = part + 1; i < end; i++) {
+        
+    // }
+
 	// sorts from start-of-vector to partition
-	quickSort(values, start, part - 1);
+	quickSort(values, start, part);
 	
 	// sorts from partition to end-of-vector
-	quickSort(values, part + 1, end);
+	quickSort(values, part, end);
 }
 
 void runQuickSort(string inputFile, string outputFile) {
@@ -88,17 +98,17 @@ void runQuickSort(string inputFile, string outputFile) {
     cout << "Reading from file..." << endl;
     readInputFile(inputFile, values);
 
-    cout << "Printing values..." << endl;
-    for (float f : values) {
-        cout << f << " " << endl;
-    }
+    // cout << "Printing values..." << endl;
+    // for (float f : values) {
+    //     cout << f << " " << endl;
+    // }
 
-    // cout << "Running QuickSort on values..." << endl;
-    // quickSort(values, 0, values.size());
+    cout << "Running QuickSort on values..." << endl;
+    quickSort(values, 0, values.size());
 
-    // cout << "Values sorted..." << endl;
-    // cout << "Writing to file..." << endl;
-    // writeOutputFile(outputFile, values);
+    cout << "Values sorted..." << endl;
+    cout << "Writing to file..." << endl;
+    writeOutputFile(outputFile, values);
     exit(0);
 }
 

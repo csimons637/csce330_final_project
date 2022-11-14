@@ -13,7 +13,7 @@ compile = $(cc) $(flags) -c
 obj = simons_charles_quickSort simons_charles_input 10randomFloats.txt 100randomFloats.txt 1000randomFloats.txt 10sortedFloats.txt 100sortedFloats.txt 1000sortedFloats.txt
 
 # makes new quickSort and removes old compiled file
-all : clean simons_charles_input simons_charles_quickSort
+all : simons_charles_input simons_charles_quickSort
 
 # makes compiled quickSort file
 simons_charles_quickSort : Simons_Charles_QuickSort.cpp
