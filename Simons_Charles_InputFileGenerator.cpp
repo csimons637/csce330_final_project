@@ -50,7 +50,7 @@ void createInputFile_1000() {
     out.close();
 }
 
-int main (int arg) {
+int main () {
     createInputFile_10();
     createInputFile_100();
     createInputFile_1000();

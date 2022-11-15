@@ -1,12 +1,5 @@
-// Author: Charles I. Simons
-// Email: cisimons@email.sc.edu
-// Section #: 001
-// Copyright 2022 Charles I. Simons
-
-// QuickSort algorithm
-// Random pivot value, swapped with the left-most value in the list (Lomuto's partition scheme)
-// Record the time taken for completion
-
+// C++ implementation QuickSort
+// using Lomuto's partition Scheme.
 #include <cstdlib>
 #include <time.h>
 #include <iostream>
@@ -89,7 +82,7 @@ void writeOutput(const char *file, float *arr, int size) {
 
 
 int main(int argc, char const *argv[]){
-    float arr[1000]; // declaring an array
+    float arr[200]; // declaring an array
 
     printf("Reading input file...");
     int n = readInput(argv[1], arr);
