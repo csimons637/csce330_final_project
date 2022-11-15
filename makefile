@@ -15,9 +15,6 @@ obj = simons_charles_quickSort simons_charles_input 10randomFloats.txt 100random
 # makes new quickSort and removes old compiled file
 all : simons_charles_input simons_charles_quickSort
 
-# test : test.cpp
-# 		$(link) $@ $^ -lrt
-
 # makes compiled quickSort file
 simons_charles_quickSort : Simons_Charles_QuickSort.cpp
 							$(link) $@ $^ -lrt
