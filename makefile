@@ -3,7 +3,7 @@
 cc = g++
 
 flags = -std=c++17
-# flags += -Wall
+flags += -w
 flags += -g
 
 link = $(cc) $(flags) -o
