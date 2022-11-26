@@ -12,3 +12,19 @@
       Creates three files for use by *QuickSort.cpp (one file for 10 floats, 100 floats and 1000 floats)
 #### makefile
       Makes the executables and cleans up the directory
+
+### Compilation
+#### *input
+      Run the command 'make simons_charles_input' to generate the executable for *InputFileGenerator.cpp
+#### *quickSort
+      Run the command 'make simons_charles_quickSort' to generate the executable for *QuickSort.cpp
+#### all
+      Alternatively, run the command 'make all' to generate both executables at once
+
+### Execution
+#### Step 1 - Run simons_charles_input first, to generate the required input files for sorting (no command-line arguments are required)
+#### Step 2 - Next, run simons_charles_quickSort (again, no command-line arguments are required)
+
+### Cleanup
+#### make clean
+      To remove all executables and input/outputfiles, run the command 'make clean'
