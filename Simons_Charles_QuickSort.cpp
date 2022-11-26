@@ -18,6 +18,7 @@ using namespace std;
 using namespace std::chrono;
 
 const char FILENAME[sizeof("./Simons_Charles_executionTime.txt")] = {'.','/','S','i','m','o','n','s','_','C','h','a','r','l','e','s','_','e','x','e','c','u','t','i','o','n','T','i','m','e','.','t','x','t'};
+const char FILENAME_AVG[sizeof("./Simons_Charles_averageExecutionTime.txt")] = {'.','/','S','i','m','o','n','s','_','C','h','a','r','l','e','s','_','a','v','e','r','a','g','e','E','x','e','c','u','t','i','o','n','T','i','m','e','.','t','x','t'};
 
 // swaps elements
 void swap(float* a, float* b) {
@@ -103,9 +104,39 @@ void writeDuration(const char *file, vector<microseconds> durations, int count) 
         fprintf(f, "%g", out); // writes the time
         fprintf(f, "%c", '\n'); // writes a newline after each row
     }
+    fclose(f);
+}
+
+// writes average execution times for each size of input
+void writeAverageDuration(const char *file, vector<microseconds> durations, int count) {
+    FILE* f = NULL;
+    f = fopen(file,"a");
+    string col1 = to_string(count) + "    ";
+    double sum = 0.000000000;
+    for (microseconds m : durations) {
+        double out = duration<double>(m).count(); // casts the duration as a double
+        sum += out;
+    }
+    sum /= (double)count; // computes the mean of the times
+    fprintf(f, "%s", col1);
+    fprintf(f, "%g", sum);
+    fclose(f);
 }
 
 int main() {
+
+    FILE* f = NULL;                                     // for overall execution times
+    f = fopen(FILENAME,"a");                            // opens the execution time file
+    string header = "Input Size    Execution Time\n";   // then
+    fprintf(f, "%s", header);                           // writes header for file
+    fclose(f);                                          // then the closes file
+
+                                                                    // for average execution times
+    f = fopen(FILENAME_AVG,"a");                                    // opens the average execution time file
+    string header_avg = "Input Size    Average Execution Time\n";   // then
+    fprintf(f, "%s", header_avg);                                   // writes header for file
+    fclose(f);                                                      // then the closes file
+
 
     vector<microseconds> tenDur;
     vector<microseconds> hunDur;
@@ -130,7 +161,7 @@ int main() {
 
     // loop for the 100 float inputs
     int j = 1;
-    while (j < 26) { // i goes until the max number of files (i.e. 25)
+    while (j < 26) { // j goes until the max number of files (i.e. 25)
         auto start = high_resolution_clock::now(); // start time
 
         string file = "./100randomFloats_" + to_string(j) + ".txt";
@@ -147,7 +178,7 @@ int main() {
 
     // loop for the 1000 float inputs
     int k = 1;
-    while (k < 26) { // i goes until the max number of files (i.e. 25)
+    while (k < 26) { // k goes until the max number of files (i.e. 25)
         auto start = high_resolution_clock::now(); // start time
 
         string file = "./1000randomFloats_" + to_string(k) + ".txt";
@@ -165,6 +196,10 @@ int main() {
     writeDuration(FILENAME, tenDur, 10);
     writeDuration(FILENAME, hunDur, 100);
     writeDuration(FILENAME, thouDur, 1000);
+
+    writeAverageDuration(FILENAME_AVG, tenDur, 10);
+    writeAverageDuration(FILENAME_AVG, hunDur, 100);
+    writeAverageDuration(FILENAME_AVG, thouDur, 1000);
 
     return 0;
 }
