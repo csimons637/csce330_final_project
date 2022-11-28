@@ -7,6 +7,9 @@
 
 using namespace std;
 
+const string FILENAME = "./Simons_Charles_executionTime.txt";
+const string  FILENAME_AVG = "./Simons_Charles_averageExecutionTime.txt";
+
 // generates the random floats between -500.00000 and 500.00000 cast as an integer
 float genRandFloat() {
     float min = -500.00000;
@@ -61,6 +64,16 @@ void createInputFile_1000() {
 }
 
 int main () {
+    ofstream execTime, avgExecTime;
+    execTime.open(FILENAME);
+    avgExecTime.open(FILENAME_AVG);
+
+    execTime << "Input Size    Execution Time (ms)" << endl; // writes header
+    avgExecTime << "Input Size    Average Execution Time (ms)" << endl; // writes header
+
+    execTime.close();
+    avgExecTime.close();
+    
     createInputFile_10();
     createInputFile_100();
     createInputFile_1000();

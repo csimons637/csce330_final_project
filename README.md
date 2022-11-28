@@ -22,8 +22,7 @@
       Alternatively, run the command 'make all' to generate both executables at once
 
 ### Execution
-#### Step 1 - Run simons_charles_input first, to generate the required input files for sorting (no command-line arguments are required)
-#### Step 2 - Next, run simons_charles_quickSort (again, no command-line arguments are required)
+      Simply run the command 'bash qs.sh' to compile and execute all files at once
 
 ### Cleanup
 #### make clean
