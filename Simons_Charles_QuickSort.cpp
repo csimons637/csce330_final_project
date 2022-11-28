@@ -157,6 +157,7 @@ int main() {
         auto stop = high_resolution_clock::now(); // end time
         auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
         tenDur.push_back(duration); // durations of all 10 float input sorts
+        i++;
     }
 
     // loop for the 100 float inputs
@@ -174,6 +175,7 @@ int main() {
         auto stop = high_resolution_clock::now(); // end time
         auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
         hunDur.push_back(duration); // durations of all 100 float input sorts
+        j++;
     }
 
     // loop for the 1000 float inputs
@@ -191,6 +193,7 @@ int main() {
         auto stop = high_resolution_clock::now(); // end time
         auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
         thouDur.push_back(duration); // durations of all 1000 float input sorts
+        k++;
     }
 
     writeDuration(FILENAME, tenDur, 10);
