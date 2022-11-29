@@ -24,6 +24,8 @@
 ### Execution
       Simply run the command 'bash qs.sh' to compile and execute all files at once
 
+      Alternatively, run './simons_charles_input' to generate the input files. Then run './simons_charles_quickSort <input_file> 0 <input_size>' for each of the input files
+
 ### Cleanup
 #### make clean
       To remove all executables and input/outputfiles, run the command 'make clean'
