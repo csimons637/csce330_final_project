@@ -18,7 +18,11 @@ using namespace std;
 using namespace std::chrono;
 
 const string FILENAME = "./Simons_Charles_executionTime.txt";
-const string  FILENAME_AVG = "./Simons_Charles_averageExecutionTime.txt";
+const string FILENAME_AVG = "./Simons_Charles_averageExecutionTime.txt";
+
+const string FILES_10[25] = {"./10randomFloats_1.txt", "./10randomFloats_2.txt", "./10randomFloats_3.txt", "./10randomFloats_4.txt", "./10randomFloats_5.txt", "./10randomFloats_6.txt", "./10randomFloats_7.txt", "./10randomFloats_8.txt", "./10randomFloats_9.txt", "./10randomFloats_10.txt", "./10randomFloats_11.txt", "./10randomFloats_12.txt", "./10randomFloats_13.txt", "./10randomFloats_14.txt", "./10randomFloats_15.txt", "./10randomFloats_16.txt", "./10randomFloats_17.txt", "./10randomFloats_18.txt", "./10randomFloats_19.txt", "./10randomFloats_20.txt", "./10randomFloats_21.txt", "./10randomFloats_22.txt", "./10randomFloats_23.txt", "./10randomFloats_24.txt", "./10randomFloats_25.txt"};
+const string FILES_100[25] = {"./100randomFloats_1.txt", "./100randomFloats_2.txt", "./100randomFloats_3.txt", "./100randomFloats_4.txt", "./100randomFloats_5.txt", "./100randomFloats_6.txt", "./100randomFloats_7.txt", "./100randomFloats_8.txt", "./100randomFloats_9.txt", "./100randomFloats_10.txt", "./100randomFloats_11.txt", "./100randomFloats_12.txt", "./100randomFloats_13.txt", "./100randomFloats_14.txt", "./100randomFloats_15.txt", "./100randomFloats_16.txt", "./100randomFloats_17.txt", "./100randomFloats_18.txt", "./100randomFloats_19.txt", "./100randomFloats_20.txt", "./100randomFloats_21.txt", "./100randomFloats_22.txt", "./100randomFloats_23.txt", "./100randomFloats_24.txt", "./100randomFloats_25.txt"};
+const string FILES_1000[25] = {"./1000randomFloats_1.txt", "./1000randomFloats_2.txt", "./1000randomFloats_3.txt", "./1000randomFloats_4.txt", "./1000randomFloats_5.txt", "./1000randomFloats_6.txt", "./1000randomFloats_7.txt", "./1000randomFloats_8.txt", "./1000randomFloats_9.txt", "./1000randomFloats_10.txt", "./1000randomFloats_11.txt", "./1000randomFloats_12.txt", "./1000randomFloats_13.txt", "./1000randomFloats_14.txt", "./1000randomFloats_15.txt", "./1000randomFloats_16.txt", "./1000randomFloats_17.txt", "./1000randomFloats_18.txt", "./1000randomFloats_19.txt", "./1000randomFloats_20.txt", "./1000randomFloats_21.txt", "./1000randomFloats_22.txt", "./1000randomFloats_23.txt", "./1000randomFloats_24.txt", "./1000randomFloats_25.txt"};
 
 // swaps elements
 void swap(float* a, float* b) {
@@ -80,156 +84,99 @@ int readInput(const char *file, float *arr) {
     return size;
 }
 
-// // writes the sorted array to the output file
-// void writeOutput(const char *file, float *arr, int size) {
-//     FILE* f = NULL;
-//     f = fopen(file,"w");
-//     int i;
-//     for(i = 0; i < size; i++) {
-//         fprintf(f, "%.2f ", arr[i]);
-//     }
-//     fclose(f);
-// }
-
-// // writes the execution times to a file; take a file name, a vector of times and an input count
-// void writeDuration(const char *file, vector<microseconds> durations, int count) {
-//     FILE* f = NULL;
-//     string col1 = to_string(count) + "    ";
-//     f = fopen(file,"a");
-//     for (microseconds m : durations) {
-//         double out = duration<double>(m).count(); // casts the duration as a double for output to the file
-//         fprintf(f, "%s", col1); // writes the first cell of a row
-//         fprintf(f, "%g", out); // writes the time
-//         fprintf(f, "%c", '\n'); // writes a newline after each row
-//     }
-//     fclose(f);
-// }
-
-// // writes average execution times for each size of input
-// void writeAverageDuration(const char *file, vector<microseconds> durations, int count) {
-//     FILE* f = NULL;
-//     f = fopen(file,"a");
-//     string col1 = to_string(count) + "    ";
-//     double sum = 0.000000000;
-//     for (microseconds m : durations) {
-//         double out = duration<double>(m).count(); // casts the duration as a double
-//         sum += out;
-//     }
-//     sum /= (double)count; // computes the mean of the times
-//     fprintf(f, "%s", col1);
-//     fprintf(f, "%g", sum);
-//     fclose(f);
-// }
-
-int main(int argc, char** argv) {
-
+void write10s(const string files[]) {
     clock_t start, stop; // tracks start and stop times
     double milsec, avgMilsec;
 
-    ofstream times, execTime, avgExecTime; // output filestreams
-    times.open("./times.txt");
+    ofstream execTime, avgExecTime; // output filestreams
     execTime.open(FILENAME, ios::app);
     avgExecTime.open(FILENAME_AVG, ios::app);
 
-    int st_ind = atoi(argv[2]);
-    int end_ind = atoi(argv[3]);
-
     avgMilsec = 0.00;
-    float* arr = new float[1000];
-    int f = readInput(argv[1], arr);
-    
-    start = clock(); // start timing
-    quickSort(arr, st_ind, end_ind);
-    stop = clock(); // stop timing
 
-    milsec = ((double)(stop - start)) * 1000 / CLOCKS_PER_SEC;
+    for (int i = 0; i <= 25; i++) { // for the 10-input files
+        float* arr = new float[1000];
+        int f = readInput(files[i].c_str(), arr);
+        
+        start = clock(); // start timing
+        quickSort(arr, 0, 10);
+        stop = clock(); // stop timing
 
-    execTime << argv[3] << "            " << milsec << endl;
+        milsec = ((double)(stop - start)) * 1000 / CLOCKS_PER_SEC;
 
+        execTime << 10 << "            " << milsec << endl;
+        avgMilsec += milsec;
+    }
+    avgMilsec /= 25.000;
+    avgExecTime << 10 << "            " << avgMilsec << endl;
     execTime.close();
     avgExecTime.close();
+}
+
+void write100s(const string files[]) {
+    clock_t start, stop; // tracks start and stop times
+    double milsec, avgMilsec;
+
+    ofstream execTime, avgExecTime; // output filestreams
+    execTime.open(FILENAME, ios::app);
+    avgExecTime.open(FILENAME_AVG, ios::app);
+
+    avgMilsec = 0.00;
+
+    for (int i = 0; i <= 25; i++) { // for the 100-input files
+        float* arr = new float[1000];
+        int f = readInput(files[i].c_str(), arr);
+        
+        start = clock(); // start timing
+        quickSort(arr, 0, 100);
+        stop = clock(); // stop timing
+
+        milsec = ((double)(stop - start)) * 1000 / CLOCKS_PER_SEC;
+
+        execTime << 100 << "            " << milsec << endl;
+        avgMilsec += milsec;
+    }
+    avgMilsec /= 25.000;
+    avgExecTime << 100 << "            " << avgMilsec << endl;
+    execTime.close();
+    avgExecTime.close();
+}
+
+void write1000s(const string files[]) {
+    clock_t start, stop; // tracks start and stop times
+    double milsec, avgMilsec;
+
+    ofstream execTime, avgExecTime; // output filestreams
+    execTime.open(FILENAME, ios::app);
+    avgExecTime.open(FILENAME_AVG, ios::app);
+
+    avgMilsec = 0.00;
+
+    for (int i = 0; i <= 25; i++) { // for the 10-input files
+        float* arr = new float[1000];
+        int f = readInput(files[i].c_str(), arr);
+        
+        start = clock(); // start timing
+        quickSort(arr, 0, 1000);
+        stop = clock(); // stop timing
+
+        milsec = ((double)(stop - start)) * 1000 / CLOCKS_PER_SEC;
+
+        execTime << 1000 << "            " << milsec << endl;
+        avgMilsec += milsec;
+    }
+    avgMilsec /= 25.000;
+    avgExecTime << 1000 << "            " << avgMilsec << endl;
+    execTime.close();
+    avgExecTime.close();
+}
+
+
+int main() {
+
+    write10s(FILES_10); // writes the results of the 10-input files
+    write100s(FILES_100); // writes the results of the 100-input files
+    write1000s(FILES_1000); // writes the results of the 1000-input files
 
     return 0;
 }
-
-    // FILE* f = NULL;                                     // for overall execution times
-    // f = fopen(FILENAME,"a");                            // opens the execution time file
-    // string header = "Input Size    Execution Time\n";   // then
-    // fprintf(f, "%s", header);                           // writes header for file
-    // fclose(f);                                          // then the closes file
-
-    //                                                                 // for average execution times
-    // f = fopen(FILENAME_AVG,"a");                                    // opens the average execution time file
-    // string header_avg = "Input Size    Average Execution Time\n";   // then
-    // fprintf(f, "%s", header_avg);                                   // writes header for file
-    // fclose(f);                                                      // then the closes file
-
-
-    // vector<microseconds> tenDur;
-    // vector<microseconds> hunDur;
-    // vector<microseconds> thouDur;
-
-    // // loop for the 10 float inputs
-    // int i = 1;
-    // while (i <= 25) { // i goes until the max number of files (i.e. 25)
-    //     auto start = high_resolution_clock::now(); // start time
-
-    //     string file = "./10randomFloats_" + to_string(i) + ".txt";
-    //     char fileNum = (char) i;
-    //     char filename[sizeof(file)] = {'.','/','1','0','r','a','n','d','o','m','F','l','o','a','t','s','_',fileNum,'.','t','x','t'};
-    //     float arr[10]; // declaring an array of size 10 to be sorted
-    //     int n = readInput(filename, arr); // reads file into arr
-    //     quickSort(arr, 0, n-1); // sorts and outputs
-
-    //     auto stop = high_resolution_clock::now(); // end time
-    //     auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
-    //     tenDur.push_back(duration); // durations of all 10 float input sorts
-    //     i++;
-    // }
-
-    // // loop for the 100 float inputs
-    // int j = 1;
-    // while (j <= 25) { // j goes until the max number of files (i.e. 25)
-    //     auto start = high_resolution_clock::now(); // start time
-
-    //     string file = "./100randomFloats_" + to_string(j) + ".txt";
-    //     char fileNum = (char) j;
-    //     char filename[sizeof(file)] = {'.','/','1','0','0','r','a','n','d','o','m','F','l','o','a','t','s','_',fileNum,'.','t','x','t'};
-    //     float arr[100]; // declaring an array of size 100 to be sorted
-    //     int n = readInput(filename, arr); // reads file into arr
-    //     quickSort(arr, 0, n-1); // sorts and outputs
-
-    //     auto stop = high_resolution_clock::now(); // end time
-    //     auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
-    //     hunDur.push_back(duration); // durations of all 100 float input sorts
-    //     j++;
-    // }
-
-    // // loop for the 1000 float inputs
-    // int k = 1;
-    // while (k <= 25) { // k goes until the max number of files (i.e. 25)
-    //     auto start = high_resolution_clock::now(); // start time
-
-    //     string file = "./1000randomFloats_" + to_string(k) + ".txt";
-    //     char fileNum = (char) k;
-    //     char filename[sizeof(file)] = {'.','/','1','0','0','0','r','a','n','d','o','m','F','l','o','a','t','s','_',fileNum,'.','t','x','t'};
-    //     float arr[1000]; // declaring an array of size 1000 to be sorted
-    //     int n = readInput(filename, arr); // reads file into arr
-    //     quickSort(arr, 0, n-1); // sorts and outputs
-
-    //     auto stop = high_resolution_clock::now(); // end time
-    //     auto duration = duration_cast<microseconds>(stop - start); // total duration of one sort
-    //     thouDur.push_back(duration); // durations of all 1000 float input sorts
-    //     k++;
-    // }
-
-    // writeDuration(FILENAME, tenDur, 10);
-    // // writeDuration(FILENAME, hunDur, 100);
-    // // writeDuration(FILENAME, thouDur, 1000);
-
-    // writeAverageDuration(FILENAME_AVG, tenDur, 10);
-    // // writeAverageDuration(FILENAME_AVG, hunDur, 100);
-    // // writeAverageDuration(FILENAME_AVG, thouDur, 1000);
-
-    // return 0;
-// }

@@ -24,8 +24,11 @@
 ### Execution
       Simply run the command 'bash qs.sh' to compile and execute all files at once
 
-      Alternatively, run './simons_charles_input' to generate the input files. Then run './simons_charles_quickSort <input_file> 0 <input_size>' for each of the input files
+      Alternatively, run './simons_charles_input' to generate the input files. Then run './simons_charles_quickSort'
 
 ### Cleanup
 #### make clean
       To remove all executables and input/outputfiles, run the command 'make clean'
+
+### Note
+      After modifying my *QuickSort.cpp, the execution time files are no longer populated by executing the files. I've attached a previous run's exec. time files as proof that it does compute properly...sometimes
