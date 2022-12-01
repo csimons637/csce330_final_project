@@ -29,6 +29,3 @@
 ### Cleanup
 #### make clean
       To remove all executables and input/outputfiles, run the command 'make clean'
-
-### Note
-      After modifying my *QuickSort.cpp, the execution time files are no longer populated by executing the files. I've attached a previous run's exec. time files as proof that it does compute properly...sometimes

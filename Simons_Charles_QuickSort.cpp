@@ -94,7 +94,7 @@ void write10s(const string files[]) {
 
     avgMilsec = 0.00;
 
-    for (int i = 0; i <= 25; i++) { // for the 10-input files
+    for (int i = 0; i < 25; i++) { // for the 10-input files
         float* arr = new float[1000];
         int f = readInput(files[i].c_str(), arr);
         
@@ -123,7 +123,7 @@ void write100s(const string files[]) {
 
     avgMilsec = 0.00;
 
-    for (int i = 0; i <= 25; i++) { // for the 100-input files
+    for (int i = 0; i < 25; i++) { // for the 100-input files
         float* arr = new float[1000];
         int f = readInput(files[i].c_str(), arr);
         
@@ -152,7 +152,7 @@ void write1000s(const string files[]) {
 
     avgMilsec = 0.00;
 
-    for (int i = 0; i <= 25; i++) { // for the 10-input files
+    for (int i = 0; i < 25; i++) { // for the 10-input files
         float* arr = new float[1000];
         int f = readInput(files[i].c_str(), arr);
         
